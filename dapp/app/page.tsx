@@ -1,112 +1,254 @@
+"use client";
+import { BrowserProvider } from "ethers";
+import { JsonRpcProvider } from "ethers/providers";
 import Image from "next/image";
-
+import Minting from "../components/mintingPanel";
+import Staking from "../components/stakingPanel";
+import Withdraw from "../components/withdrawPanel";
+import { useEffect, useState } from "react";
+import { getContract } from "../config";
+import Background from "../public/images/BG.png";
+import style from "./button.module.css";
 export default function Home() {
+  const [walletKey, setwalletKey] = useState("");
+  const [chosenButton, setChosenButton] = useState<number>();
+
+  const showCard = () => {
+    switch (chosenButton) {
+      case 0:
+        return <Minting />;
+      case 1:
+        return <Staking />;
+      case 2:
+        return <Withdraw />;
+      default:
+        return (
+          <div
+            className="text-white mb-20 text-4xl font-bubbles"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <p>CONNECT YOUR WALLET</p>
+          </div>
+        );
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (walletKey !== "") {
+        setChosenButton(0);
+      } else {
+        setChosenButton(4);
+      }
+    }
+  }, [walletKey]);
+
+  const connectWallet = async () => {
+    const { ethereum } = window as any;
+
+    await ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: [
+        {
+          nativeCurrency: {
+            name: "ETH",
+            symbol: "ETH",
+            decimals: 18,
+          },
+          rpcUrls: [
+            "https://sepolia-rollup.arbitrum.io/rpc",
+            "https://arbitrum-sepolia.blockpi.network/v1/rpc/public",
+          ],
+          chainId: "0x66eee",
+          chainName: "Arbitrum Sepolia",
+        },
+      ],
+    });
+
+    const accounts = await ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    setwalletKey(accounts[0]);
+
+    await ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [
+        {
+          chainId: "0x66eee",
+        },
+      ],
+    });
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
+    <main
+      className="flex min-h-screen flex-col items-center justify-between p-12 relative"
+      style={{
+        backgroundImage: `url(${Background.src})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundPositionY: "80%",
+        overflow: "hidden",
+      }}
+    >
+      <div className="absolute top-0 left-0 w-full h-30 bg-black bg-opacity-50 z-10;">
+        <p className="fixed left-0 top-0 flex w-full justify-space-between items-center p-8 pb-6 pt-8 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:p-4 lg:dark:bg-transparent">
+          <div className="flex items-center group">
+            <a
+              href="https://www.youtube.com/shorts/8_KFck-foNc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=""
+            >
+              <Image
+                src="/images/Bubbles.png"
+                alt="Bubbles"
+                className="mr-3 mb-1 group-hover:scale-105 group transition duration-300 motion-reduce:transform-none"
+                width={60}
+                height={64}
+                priority
+              />
+            </a>
+            <span className="text-white font-bubbles text-3xl -ml-2 group-hover:scale-105 transition duration-300 motion-reduce:transform-none ">
+              Bubbles
+            </span>
+          </div>
+          <button
+            onClick={() => {
+              connectWallet();
+            }}
+            className="text-white font-bubbles text-xl ml-auto hover:scale-105 transition duration-300 motion-reduce:transform-none border-4 rounded-full border-grey-lightest p-4 shadow text-grey-lightest"
+          >
+            {walletKey !== "" && (
+              <>
+                <span className="">
+                  {" "}
+                  Connected:{" "}
+                </span>
+                <span className="font-sans">
+                  {walletKey.substring(0, 7)}
+                  {walletKey.length > 7 ? "..." : ""}
+                </span>
+              </>
+            )}
+            {walletKey === "" && <span className="">Connect Wallet</span>}
+          </button>
         </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
+      </div>
+
+      <div className="text-white relative mt-10 top-14 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left rounded-lg p-4 bg-gradient-to-b from-red-500 to-red-700 shadow-xl">
+        <button
+          className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
+          onClick={() => (walletKey ? setChosenButton(0) : setChosenButton(3))}
+        >
+          <h2
+            className={`flex items-center justify-center font-bubbles text-white text-3xl ml-auto transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none `}
+          >
+            <Image
+              src="/images/Bubbles.png"
+              alt="Left Image"
+              width={40}
+              height={40}
+              className="mr-2 "
+            />
+            <span className="inline-block transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none ">
+              Mint{" "}
+            </span>
+          </h2>
+          <p className={`m-0 text-white text-sm opacity-50`}>Blub blub!</p>
+        </button>
+
+        <button
+          className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
+          onClick={() => (walletKey ? setChosenButton(1) : setChosenButton(3))}
+        >
+          <h2
+            className={`flex items-center justify-center font-bubbles text-white text-3xl ml-auto transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none `}
+          >
+            <Image
+              src="/images/Bubbles.png"
+              alt="Left Image"
+              width={40}
+              height={40}
+              className="mr-2"
+            />
+            <span className="inline-block transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none">
+              Stake{" "}
+            </span>
+          </h2>
+          <p className={`m-0 text-white text-sm opacity-50`}>
+            Pop pop!
+          </p>
+        </button>
+
+        <button
+          className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50 "
+          onClick={() => (walletKey ? setChosenButton(2) : setChosenButton(3))}
+        >
+          <h2
+            className={`flex items-center justify-center font-bubbles text-white text-3xl ml-auto transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none `}
+          >
+            <Image
+              src="/images/Bubbles.png"
+              alt="Left Image"
+              width={40}
+              height={40}
+              className="mr-2"
+            />
+            <span className="inline-block transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none">
+              Withdraw{" "}
+            </span>
+          </h2>
+          <p className={`m-0 text-white text-sm opacity-50`}>
+            Blub blub!
+          </p>
+        </button>
+      </div>
+
+      <div className="mb-40 mt-40 ">{showCard()}</div>
+
+      <div className="absolute bottom-0 left-0 w-full h-14 bg-black bg-opacity-50 z-10;">
+        <p className="flex items-center h-full justify-spaces-between">
+          <span className="font-bubbles text-white text-2xl ml-2">
+            An Arbitrum project by Ray Tristan Publeo
+          </span>
           <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href="https://arbitrum.io/"
             target="_blank"
             rel="noopener noreferrer"
+            className="mr-5 ml-auto"
           >
-            By{" "}
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
+              src="/images/arbitrum-arb-logo.png"
+              alt="Arbitrum Logo"
+              className=""
+              width={40}
+              height={40}
               priority
             />
           </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+          <a
+            href="https://github.com/Publeo-RT"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-5"
+          >
+            <Image
+              src="/images/githublogo.svg"
+              alt="Github Logo"
+              className=""
+              width={40}
+              height={40}
+              priority
+            />
+          </a>
+        </p>
       </div>
     </main>
   );
