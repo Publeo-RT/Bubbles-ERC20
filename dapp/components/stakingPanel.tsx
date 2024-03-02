@@ -58,7 +58,7 @@ function Staking() {
 
   return (
     <div
-      className="text-white grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96"
+      className="grid text-white text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-full p-10 bg-gradient-to-b from-red-500 to-red-700 h-96 transition-all border-white border-8"
       style={{
         position: "absolute",
         top: "50%",
@@ -68,20 +68,20 @@ function Staking() {
     >
       <div className="flex justify-center items-center flex-col">
         <div className="mb-10 minting-container flex items-center">
-          <span className="mt-10 flex justify-center items-center font-turds text-xl">
-            Current Ebak Staked: &nbsp;{" "}
+          <span className="mt-9 flex justify-center items-center font-bubbles text-white text-2xl">
+            Bubbles Staked: &nbsp;{" "}
             <p
-              className="text-white font-sans text-3xl"
+              className="text-white font-sans text-2xl"
               style={{ marginTop: "-4px" }}
             >
               {stakedAmountString}
             </p>
             <Image
-              src="/images/Ebak-Icon.png"
+              src="/images/Bubbles.png"
               alt="Left Image"
               width={30}
               height={30}
-              className="ml-1 mb-1"
+              className="ml-1"
             />
           </span>
           <button
@@ -94,7 +94,7 @@ function Staking() {
               alt="Left Image"
               width={20}
               height={20}
-              className="ml-4 mt-10"
+              className="ml-4 mt-8"
               style={{ filter: "invert(1)", transition: "transform 0.3s" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "scale(1.1)";
@@ -108,31 +108,33 @@ function Staking() {
 
         <input
           type="number"
-          className="border rounded-md p-2 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:border-transparent"
+          className="rounded-full p-2 focus:outline-none focus:ring-4 focus:ring-white focus:border-transparent bg-red-400 caret-white"
           value={stakingAmount}
           onChange={(e) => amountChange(e)}
           placeholder="Enter amount to stake"
-          style={{ color: "black" }}
+          style={{ color: "white" }}
         />
         <button
-          className="text-white mt-10 flex justify-center items-center font-turds text-xl rounded-lg p-4 bg-yellow-400 transition duration-200 ease-in-out hover:bg-yellow-500 hover:shadow-lg"
-          onClick={stakeCoin}
+          className="mt-8 flex justify-center items-center font-bubbles text-red-500 text-2xl rounded-full p-3 bg-white transition duration-200 ease-in-out hover:bg-gray-200 hover:shadow-lg"
+          onClick={() => {
+            stakeCoin();
+          }}
         >
           STAKE
         </button>
-        <div className="mt-5">
+        <div className="mt-1 text-2xl">
           {submitted && (
             <div className="minting-container flex items-center">
               <Image
-                src="/images/stake.png"
+                src="/images/Bubbles.png"
                 alt="Left Image"
                 width={40}
                 height={40}
                 className="mr-5"
               />
-              <p className="font-turds text-white">Staking successful!</p>
+              <p className="font-bubbles text-white">Staking successful!</p>
               <Image
-                src="/images/stake.png"
+                src="/images/Bubbles.png"
                 alt="Left Image"
                 width={40}
                 height={40}
@@ -148,7 +150,7 @@ function Staking() {
                 href={`https://sepolia.arbiscan.io/tx/${transactionHash}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-turds text-blue-500  cursor-pointer"
+                className="font-bubbles text-cyan-300 cursor-pointer hover:scale-105 transition"
               >
                 Click to View Transaction
               </a>

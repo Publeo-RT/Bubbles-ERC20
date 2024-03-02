@@ -142,9 +142,9 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="text-white relative mt-10 top-14 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left rounded-lg p-4 bg-gradient-to-b from-red-500 to-red-700 shadow-xl">
+      <div className="text-white relative mt-10 top-14 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left p-4 bg-gradient-to-b from-red-500 to-red-700 shadow-xl rounded-full border-8 border-white">
         <button
-          className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
+          className="group rounded-full border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
           onClick={() => (walletKey ? setChosenButton(0) : setChosenButton(3))}
         >
           <h2
@@ -165,7 +165,7 @@ export default function Home() {
         </button>
 
         <button
-          className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
+          className="group rounded-full border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
           onClick={() => (walletKey ? setChosenButton(1) : setChosenButton(3))}
         >
           <h2
@@ -188,7 +188,7 @@ export default function Home() {
         </button>
 
         <button
-          className="group rounded-lg border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50 "
+          className="group rounded-full border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50 "
           onClick={() => (walletKey ? setChosenButton(2) : setChosenButton(3))}
         >
           <h2

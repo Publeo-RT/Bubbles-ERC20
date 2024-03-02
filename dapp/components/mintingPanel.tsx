@@ -13,11 +13,11 @@ function Minting() {
 
   const addToken = async () => {
     const { ethereum } = window as any;
-    const tokenAddress = "0xaA5B2ccF4Bf2A73117A5BFF1bFe2010BFc7A69c8";
-    const tokenSymbol = "TAE";
+    const tokenAddress = "0x81cb69089160cBA0F366d992Ec230efC7AFCc8b4";
+    const tokenSymbol = "BUB";
     const tokenDecimals = 18;
     const tokenImage =
-      "https://raw.githubusercontent.com/JohnPaulPabelico/Ebak-Coin/main/dapp/public/images/Ebak-Icon.png";
+      "https://raw.githubusercontent.com/Publeo-RT/Bubbles-ERC20/main/dapp/public/images/Bubbles.png";
 
     try {
       const wasAdded = await ethereum.request({
@@ -85,7 +85,7 @@ function Minting() {
 
   return (
     <div
-      className="grid text-white text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-lg p-4 bg-gradient-to-b from-amber-700 to-amber-900 h-96 transition-all"
+      className="grid text-white text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-full p-10 bg-gradient-to-b from-red-500 to-red-700 h-96 transition-all border-white border-8"
       style={{
         position: "absolute",
         top: "50%",
@@ -95,20 +95,20 @@ function Minting() {
     >
       <div className="flex justify-center items-center flex-col">
         <div className="mb-10 minting-container flex items-center">
-          <span className="mt-5 flex justify-center items-center font-turds text-white text-xl">
-            Current Ebak Balance: &nbsp;{" "}
+          <span className="mt-5 flex justify-center items-center font-bubbles text-white text-2xl">
+            Bubbles: &nbsp;{" "}
             <p
-              className="font-sans text-white text-3xl"
+              className="font-sans text-white text-2xl"
               style={{ marginTop: "-4px" }}
             >
               {balanceString}
             </p>
             <Image
-              src="/images/Ebak-Icon.png"
+              src="/images/Bubbles.png"
               alt="Left Image"
               width={30}
               height={30}
-              className="ml-1 mb-1"
+              className="ml-1"
             />
           </span>
           <button
@@ -135,33 +135,33 @@ function Minting() {
 
         <input
           type="number"
-          className=" border rounded-md p-2 focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:border-transparent"
+          className="rounded-full p-2 focus:outline-none focus:ring-4 focus:ring-white focus:border-transparent bg-red-400 caret-white"
           value={mintingAmount}
           onChange={(e) => amountChange(e)}
           placeholder="Enter amount to mint"
-          style={{ color: "black" }}
+          style={{ color: "white" }}
         />
         <button
-          className="mt-10 flex justify-center items-center font-turds text-white text-xl rounded-lg p-4 bg-yellow-400 transition duration-200 ease-in-out hover:bg-yellow-500 hover:shadow-lg"
+          className="mt-8 flex justify-center items-center font-bubbles text-red-500 text-2xl rounded-full p-3 bg-white transition duration-200 ease-in-out hover:bg-gray-200 hover:shadow-lg"
           onClick={() => {
             mintCoin();
           }}
         >
           MINT
         </button>
-        <div className="mt-5">
+        <div className="mt-1 text-2xl">
           {submitted && (
             <div className="minting-container flex items-center">
               <Image
-                src="/images/Ebak-Icon.png"
+                src="/images/Bubbles.png"
                 alt="Left Image"
                 width={40}
                 height={40}
                 className="mr-5"
               />
-              <p className="font-turds text-white">Minting successful!</p>
+              <p className="font-bubbles text-white">Minting Successful!</p>
               <Image
-                src="/images/Ebak-Icon.png"
+                src="/images/Bubbles.png"
                 alt="Left Image"
                 width={40}
                 height={40}
@@ -177,14 +177,14 @@ function Minting() {
                 href={`https://sepolia.arbiscan.io/tx/${transactionHash}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-turds text-blue-500  cursor-pointer"
+                className="font-bubbles text-cyan-300 cursor-pointer hover:scale-105 transition"
               >
                 Click to View Transaction
               </a>
             </div>
           )}
         </div>
-        <div className="font-turds text-lime-400  cursor-pointer">
+        <div className="font-bubbles text-lime-300  cursor-pointer hover:scale-105 transition">
           {submitted && (
             <div className="minting-container flex items-center">
               <button
@@ -192,7 +192,7 @@ function Minting() {
                   addToken();
                 }}
               >
-                Import Token to Metamask
+                Import Bubbles to Metamask
               </button>
             </div>
           )}
