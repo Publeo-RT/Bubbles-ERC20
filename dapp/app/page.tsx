@@ -115,9 +115,16 @@ export default function Home() {
                 priority
               />
             </a>
-            <span className="text-white font-bubbles text-3xl -ml-2 group-hover:scale-105 transition duration-300 motion-reduce:transform-none ">
-              Bubbles
+            <a
+              href="https://www.youtube.com/shorts/8_KFck-foNc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white font-bubbles text-3xl -ml-2 group-hover:scale-105 transition duration-300 motion-reduce:transform-none "
+            >
+            <span>
+              Bubbles | Blub Blub Blub
             </span>
+            </a>
           </div>
           <button
             onClick={() => {
