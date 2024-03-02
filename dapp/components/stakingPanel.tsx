@@ -58,10 +58,11 @@ function Staking() {
 
   return (
     <div
-      className="grid text-white text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-full p-10 bg-gradient-to-b from-red-500 to-red-700 h-96 transition-all border-white border-8"
+      className="mt-20 grid text-white text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-full p-10 bg-gradient-to-b from-red-500 to-red-700 transition-all border-white border-8"
       style={{
-        width: "1053px",
-        height: "400px",
+        width: "100vh",
+        height: "40vh",
+        position: "relative",
       }}
     >
       <div className="flex justify-center items-center flex-col">

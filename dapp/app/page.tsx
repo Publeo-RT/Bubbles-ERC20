@@ -98,7 +98,7 @@ export default function Home() {
       }}
     >
       <div className="absolute top-0 left-0 w-full h-30 bg-black bg-opacity-50 z-10;">
-        <p className="fixed left-0 top-0 flex w-full justify-space-between items-center p-8 pb-6 pt-8 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:p-4 lg:dark:bg-transparent">
+        <p className="left-0 top-0 flex w-full justify-space-between items-center p-8 pb-6 pt-8 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:p-4 lg:dark:bg-transparent">
           <div className="flex items-center group">
             <a
               href="https://www.youtube.com/shorts/8_KFck-foNc"
@@ -149,10 +149,16 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="text-white relative mt-10 top-14 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left p-4 bg-gradient-to-b from-red-500 to-red-700 shadow-xl rounded-full border-8 border-white">
+      <div className="text-white relative top-24 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left p-4 bg-gradient-to-b from-red-500 to-red-700 shadow-xl rounded-full border-8 border-white"
+      style={{
+        width: "100vh",
+        height: "100%",
+        position: "relative",
+      }}>
         <button
           className="group rounded-full border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
           onClick={() => (walletKey ? setChosenButton(0) : setChosenButton(3))}
+          
         >
           <h2
             className={`flex items-center justify-center font-bubbles text-white text-3xl ml-auto transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none `}
