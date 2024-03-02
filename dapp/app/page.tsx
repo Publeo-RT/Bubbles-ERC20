@@ -218,7 +218,7 @@ export default function Home() {
         </button>
       </div>
 
-      <div className="mb-40 mt-40 ">{showCard()}</div>
+      <div className="mb-56">{showCard()}</div>
 
       <div className="absolute bottom-0 left-0 w-full h-14 bg-black bg-opacity-50 z-10;">
         <p className="flex items-center h-full justify-spaces-between">

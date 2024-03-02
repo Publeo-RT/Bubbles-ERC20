@@ -60,10 +60,8 @@ function Staking() {
     <div
       className="grid text-white text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-full p-10 bg-gradient-to-b from-red-500 to-red-700 h-96 transition-all border-white border-8"
       style={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
+        width: "1053px",
+        height: "400px",
       }}
     >
       <div className="flex justify-center items-center flex-col">
