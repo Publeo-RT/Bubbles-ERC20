@@ -4,7 +4,7 @@ import { getContract } from "../config";
 import Image from "next/image";
 
 function Minting() {
-  const [mintingAmount, setMintingAmount] = useState<number>(0);
+  const [mintingAmount, setMintingAmount] = useState<number>();
   const [submitted, setSubmitted] = useState(false);
   const [transactionHash, setTransactionHash] = useState("");
   const [balance, setBalance] = useState<number>(0);
@@ -85,9 +85,9 @@ function Minting() {
 
   return (
     <div
-      className="mt-20 grid text-white text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left rounded-full p-10 bg-gradient-to-b from-red-500 to-red-700 transition-all border-white border-8"
+      className="mt-20 grid text-white text-center p-10 bg-gradient-to-b from-red-500 to-red-700 transition-all border-white border-8"
       style={{
-        width: "100vh",
+        width: "52vh",
         height: "40vh",
         position: "relative",
       }}

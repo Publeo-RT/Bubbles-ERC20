@@ -1,4 +1,5 @@
 "use client";
+import styles from "./index.module.css";
 import { BrowserProvider } from "ethers";
 import { JsonRpcProvider } from "ethers/providers";
 import Image from "next/image";
@@ -13,29 +14,15 @@ export default function Home() {
   const [walletKey, setwalletKey] = useState("");
   const [chosenButton, setChosenButton] = useState<number>();
 
-  const showCard = () => {
-    switch (chosenButton) {
-      case 0:
-        return <Minting />;
-      case 1:
-        return <Staking />;
-      case 2:
-        return <Withdraw />;
-      default:
-        return (
-          <div
-            className="text-white mb-20 text-4xl font-bubbles"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <p>Testing san to </p>
-          </div>
-        );
-    }
+ 
+  const Desktop = () => {
+    return (
+      <div>
+        <div className={styles.desktop1Child}> <Minting /></div>
+        <div className={styles.desktop1Item}>  <Staking /></div>
+        <div className={styles.desktop1Inner}> <Withdraw /></div>
+      </div>
+    );
   };
 
   useEffect(() => {
@@ -97,6 +84,7 @@ export default function Home() {
         overflow: "hidden",
       }}
     >
+      <Desktop />
       <div className="absolute top-0 left-0 w-full h-30 bg-black bg-opacity-50 z-10;">
         <p className="left-0 top-0 flex w-full justify-space-between items-center p-8 pb-6 pt-8 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:p-4 lg:dark:bg-transparent">
           <div className="flex items-center group">
@@ -149,82 +137,9 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="text-white relative top-24 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left p-4 bg-gradient-to-b from-red-500 to-red-700 shadow-xl rounded-full border-8 border-white"
-      style={{
-        width: "100vh",
-        height: "100%",
-        position: "relative",
-      }}>
-        <button
-          className="group rounded-full border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
-          onClick={() => (walletKey ? setChosenButton(0) : setChosenButton(3))}
-          
-        >
-          <h2
-            className={`flex items-center justify-center font-bubbles text-white text-3xl ml-auto transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none `}
-          >
-            <Image
-              src="/images/Bubbles.png"
-              alt="Left Image"
-              width={40}
-              height={40}
-              className="mr-2 "
-            />
-            <span className="inline-block transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none ">
-              Mint{" "}
-            </span>
-          </h2>
-          <p className={`m-0 text-white text-sm opacity-50`}>Blub blub!</p>
-        </button>
+      
 
-        <button
-          className="group rounded-full border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50"
-          onClick={() => (walletKey ? setChosenButton(1) : setChosenButton(3))}
-        >
-          <h2
-            className={`flex items-center justify-center font-bubbles text-white text-3xl ml-auto transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none `}
-          >
-            <Image
-              src="/images/Bubbles.png"
-              alt="Left Image"
-              width={40}
-              height={40}
-              className="mr-2"
-            />
-            <span className="inline-block transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none">
-              Stake{" "}
-            </span>
-          </h2>
-          <p className={`m-0 text-white text-sm opacity-50`}>
-            Pop pop!
-          </p>
-        </button>
-
-        <button
-          className="group rounded-full border border-transparent px-5 py-4 transition-all duration-300 hover:shadow-lg hover:bg-gray-800/40 focus:bg-gray-900/50 "
-          onClick={() => (walletKey ? setChosenButton(2) : setChosenButton(3))}
-        >
-          <h2
-            className={`flex items-center justify-center font-bubbles text-white text-3xl ml-auto transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none `}
-          >
-            <Image
-              src="/images/Bubbles.png"
-              alt="Left Image"
-              width={40}
-              height={40}
-              className="mr-2"
-            />
-            <span className="inline-block transition-transform group-hover:scale-110 duration:300 motion-reduce:transform-none">
-              Withdraw{" "}
-            </span>
-          </h2>
-          <p className={`m-0 text-white text-sm opacity-50`}>
-            Blub blub!
-          </p>
-        </button>
-      </div>
-
-      <div className="mb-56">{showCard()}</div>
+      
 
       <div className="absolute bottom-0 left-0 w-full h-14 bg-black bg-opacity-50 z-10;">
         <p className="flex items-center h-full justify-spaces-between">

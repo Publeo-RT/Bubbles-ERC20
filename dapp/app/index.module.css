@@ -1,0 +1,24 @@
+.desktop1Child,
+.desktop1Inner,
+.desktop1Item {
+  position: absolute;
+  top: 91px;
+  left: 120px;
+  
+  width: 479px;
+  height: 881px;
+}
+.desktop1Inner,
+.desktop1Item {
+  left: 737px;
+}
+.desktop1Inner {
+  left: 1378px;
+}
+.desktop1 {
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  height: 1080px;
+  overflow: hidden;
+}
