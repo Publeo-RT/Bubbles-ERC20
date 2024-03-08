@@ -32,7 +32,7 @@ export default function Home() {
               transform: "translate(-50%, -50%)",
             }}
           >
-            <p>CONNECT YOUR WALLET</p>
+            <p>Testing san to </p>
           </div>
         );
     }
