@@ -110,15 +110,16 @@ export default function Home() {
               className="text-white font-bubbles text-3xl -ml-2 group-hover:scale-105 transition duration-300 motion-reduce:transform-none "
             >
             <span>
-              Bubbles | Blub Blub Blub
+              Bubbles the Ranchu
             </span>
             </a>
+            
           </div>
           <button
             onClick={() => {
               connectWallet();
             }}
-            className="text-white font-bubbles text-xl ml-auto hover:scale-105 transition duration-300 motion-reduce:transform-none border-4 rounded-full border-grey-lightest p-4 shadow text-grey-lightest"
+            className="text-white font-bubbles text-xl ml-auto hover:scale-105 transition duration-300 motion-reduce:transform-none border-4 border-grey-lightest p-4 shadow text-grey-lightest"
           >
             {walletKey !== "" && (
               <>
