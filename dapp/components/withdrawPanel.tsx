@@ -72,7 +72,7 @@ function Withdraw() {
     className="mt-20 grid text-white text-center p-10 bg-gradient-to-b from-red-500 to-red-700 transition-all border-white border-8"
     style={{
       width: "52vh",
-      height: "40vh",
+      height: "60vh",
       position: "relative",
       }}
     >
