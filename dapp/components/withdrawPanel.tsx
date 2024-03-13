@@ -69,7 +69,7 @@ function Withdraw() {
 
   return (
     <div
-    className="mt-20 grid text-white text-center p-10 bg-gradient-to-b from-red-500 to-red-700 transition-all border-white border-8"
+    className="mt-20 grid text-white text-center p-10 bg-gradient-to-b from-red-400 to-red-800 transition-all rounded-lg"
     style={{
       width: "52vh",
       height: "60vh",
@@ -117,7 +117,7 @@ function Withdraw() {
         </div>
 
         <div className=" minting-container flex items-center">
-          <p className=" flex justify-center items-center font-bubbles text-white text-xl ">
+          <p className=" flex items-center font-bubbles text-white text-xl ">
             Withdraw Status: &nbsp;
             <span style={{ color: elapsedStakeTime > 60 ? "lime" : "maroon" }}>
               {elapsedStakeTime > 60
