@@ -2,18 +2,18 @@
 .desktop1Inner,
 .desktop1Item {
   position: absolute;
-  top: 91px;
-  left: 120px;
+  top: 100px;
+  left: 100px;
   
   width: 479px;
   height: 881px;
 }
 .desktop1Inner,
 .desktop1Item {
-  left: 737px;
+  left: 550px;
 }
 .desktop1Inner {
-  left: 1378px;
+  left: 1050px;
 }
 .desktop1 {
   width: 100%;

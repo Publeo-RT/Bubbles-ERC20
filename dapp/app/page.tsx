@@ -8,7 +8,7 @@ import Staking from "../components/stakingPanel";
 import Withdraw from "../components/withdrawPanel";
 import { useEffect, useState } from "react";
 import { getContract } from "../config";
-import Background from "../public/images/BG.png";
+import Background from "../public/images/BG.jpg";
 import style from "./button.module.css";
 export default function Home() {
   const [walletKey, setwalletKey] = useState("");
@@ -141,43 +141,7 @@ export default function Home() {
 
       
 
-      <div className="absolute bottom-0 left-0 w-full h-14 bg-black bg-opacity-50 z-10;">
-        <p className="flex items-center h-full justify-spaces-between">
-          <span className="font-bubbles text-white text-2xl ml-2">
-            An Arbitrum project by Ray Tristan Publeo
-          </span>
-          <a
-            href="https://arbitrum.io/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mr-5 ml-auto"
-          >
-            <Image
-              src="/images/arbitrum-arb-logo.png"
-              alt="Arbitrum Logo"
-              className=""
-              width={40}
-              height={40}
-              priority
-            />
-          </a>
-          <a
-            href="https://github.com/Publeo-RT"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mr-5"
-          >
-            <Image
-              src="/images/githublogo.svg"
-              alt="Github Logo"
-              className=""
-              width={40}
-              height={40}
-              priority
-            />
-          </a>
-        </p>
-      </div>
+    
     </main>
   );
 }

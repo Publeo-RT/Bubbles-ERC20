@@ -16,20 +16,18 @@ contract Bubbles is ERC20, Ownable {
         Ownable(initialOwner)
     {}
 
-    function mint(address to, uint256 amount) public {
-        uint256 adjustedAmount = amount * 1e18;
-        _mint(to, adjustedAmount);
+    function mint(address to, uint256 input) public {
+        uint256 convertedA = input * 1e18;
+        _mint(to, convertedA);
     }
 
-    function stake(uint256 amount) public {
-        uint256 adjustedAmount = amount * 1e18;
-
-        require(adjustedAmount > 0, "Cannot stake 0 tokens");
-        require(balanceOf(msg.sender) >= adjustedAmount, "Insufficient balance");
-
-        _stakes[msg.sender] += adjustedAmount;
+    function stake(uint256 input) public {
+        uint256 convertedA = input * 1e18;
+        _stakes[msg.sender] += convertedA;
         _lastStakeTimestamp[msg.sender] = block.timestamp;
-        _transfer(msg.sender, address(this), adjustedAmount);
+        _transfer(msg.sender, address(this), convertedA);
+        require(convertedA > 0, "Cannot stake 0 tokens");
+        require(balanceOf(msg.sender) >= convertedA, "Insufficient balance");        
   }
 
     function getStake(address account) public view returns (uint256) {
@@ -41,20 +39,17 @@ contract Bubbles is ERC20, Ownable {
     function withdraw() public {
         require(block.timestamp > (_lastStakeTimestamp[msg.sender] + lockInPeriod), "You cannot withdraw funds, you are still in the lock in period");
         require(_stakes[msg.sender] > 0, "No staked tokens");
-
-        uint256 stakedAmount = _stakes[msg.sender];
+        uint256 stakedinput = _stakes[msg.sender];
         uint256 reward = ((block.timestamp - _lastStakeTimestamp[msg.sender]) * _rewardRate) * 1e18;
-
         _stakes[msg.sender] = 0;
-        _transfer(address(this), msg.sender, stakedAmount);
+        _transfer(address(this), msg.sender, stakedinput);
         _mint(msg.sender, reward);
   }
 
     function getWithdraw(address account) public view returns (uint256) {
-        uint256 stakedAmount = _stakes[msg.sender] / 1e18;
+        uint256 stakedinput = _stakes[msg.sender] / 1e18;
         uint256 reward = ((block.timestamp - _lastStakeTimestamp[account]) * _rewardRate);
-
-        uint256 total = reward + stakedAmount; 
+        uint256 total = reward + stakedinput; 
         return total;
   }
 
